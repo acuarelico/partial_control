@@ -1,0 +1,362 @@
+{
+  "parameters": {
+    "safe": {
+      "ds": 2,
+      "sigma": 0.5,
+      "threshold": 0.5,
+      "max_faces": 500000,
+      "z_max": 40.0
+    },
+    "asym": {
+      "ds": 1,
+      "sigma": 0.15,
+      "threshold": 0.5,
+      "max_faces": 500000
+    },
+    "draco_quantization_bits": 14
+  },
+  "files": [
+    {
+      "source": "batch_lorenz_N2001_dt1.2_xi0.30_u0.20.npz",
+      "base": "batch_lorenz_N2001_dt1.2_xi0.30_u0.20",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt1.2_xi0.30_u0.20_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 248378,
+        "faces": 500000,
+        "size_MB": 0.98
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt1.2_xi0.30_u0.20_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249402,
+        "faces": 500000,
+        "size_MB": 0.81
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt1.2_xi0.60_u0.40.npz",
+      "base": "batch_lorenz_N2001_dt1.2_xi0.60_u0.40",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt1.2_xi0.60_u0.40_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 249973,
+        "faces": 500000,
+        "size_MB": 0.92
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt1.2_xi0.60_u0.40_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249989,
+        "faces": 500000,
+        "size_MB": 0.8
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt1.2_xi1.50_u1.00.npz",
+      "base": "batch_lorenz_N2001_dt1.2_xi1.50_u1.00",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt1.2_xi1.50_u1.00_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 250000,
+        "faces": 500000,
+        "size_MB": 0.91
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt1.2_xi1.50_u1.00_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249992,
+        "faces": 500000,
+        "size_MB": 0.83
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt2.4_xi0.30_u0.20.npz",
+      "base": "batch_lorenz_N2001_dt2.4_xi0.30_u0.20",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt2.4_xi0.30_u0.20_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 233579,
+        "faces": 500000,
+        "size_MB": 1.2
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt2.4_xi0.30_u0.20_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 243215,
+        "faces": 500000,
+        "size_MB": 0.87
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt2.4_xi0.60_u0.40.npz",
+      "base": "batch_lorenz_N2001_dt2.4_xi0.60_u0.40",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt2.4_xi0.60_u0.40_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 248558,
+        "faces": 500000,
+        "size_MB": 0.99
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt2.4_xi0.60_u0.40_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249433,
+        "faces": 500000,
+        "size_MB": 0.84
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt2.4_xi1.50_u1.00.npz",
+      "base": "batch_lorenz_N2001_dt2.4_xi1.50_u1.00",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt2.4_xi1.50_u1.00_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 249523,
+        "faces": 500000,
+        "size_MB": 0.97
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt2.4_xi1.50_u1.00_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249857,
+        "faces": 500000,
+        "size_MB": 0.88
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt3.6_xi0.30_u0.20.npz",
+      "base": "batch_lorenz_N2001_dt3.6_xi0.30_u0.20",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt3.6_xi0.30_u0.20_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 444338,
+        "faces": 1124924,
+        "size_MB": 3.41
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt3.6_xi0.30_u0.20_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 199259,
+        "faces": 499998,
+        "size_MB": 1.35
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt3.6_xi0.60_u0.40.npz",
+      "base": "batch_lorenz_N2001_dt3.6_xi0.60_u0.40",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt3.6_xi0.60_u0.40_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 336540,
+        "faces": 781264,
+        "size_MB": 2.06
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt3.6_xi0.60_u0.40_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 211820,
+        "faces": 500000,
+        "size_MB": 1.18
+      }
+    },
+    {
+      "source": "batch_lorenz_N2001_dt3.6_xi1.50_u1.00.npz",
+      "base": "batch_lorenz_N2001_dt3.6_xi1.50_u1.00",
+      "grid_N": 2001,
+      "grid_h": 0.024999618530273438,
+      "grid_L": 25,
+      "attractors": {
+        "Cp": [
+          7.118052168020874,
+          7.118052168020874,
+          19.0
+        ],
+        "Cm": [
+          -7.118052168020874,
+          -7.118052168020874,
+          19.0
+        ]
+      },
+      "safe": {
+        "file": "batch_lorenz_N2001_dt3.6_xi1.50_u1.00_safe_ds2_s0.50_t0.50_z40.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "z_max": 40.0,
+        "vertices": 297590,
+        "faces": 639602,
+        "size_MB": 1.59
+      },
+      "asym": {
+        "file": "batch_lorenz_N2001_dt3.6_xi1.50_u1.00_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 237133,
+        "faces": 499998,
+        "size_MB": 1.01
+      }
+    }
+  ]
+}

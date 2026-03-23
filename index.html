@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lorenz 3D Safe Set — Partial Control</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{overflow:hidden;background:#f2f2f2;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:#333}
+canvas{display:block}
+#panel{position:absolute;top:16px;left:16px;background:rgba(255,255,255,0.93);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:10px 14px;border-radius:12px;box-shadow:0 4px 28px rgba(0,0,0,0.10);
+  font-size:13px;line-height:1.3;max-width:500px;z-index:10}
+#panel-top{display:flex;gap:14px;align-items:flex-start}
+#info-col{flex:1;min-width:0}
+#btns{margin-top:0;display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+#panel h2{font-size:16px;color:#111;margin-bottom:1px;letter-spacing:-0.3px}
+#panel .sub{font-size:10px;color:#999;margin-bottom:4px}
+.leg{display:flex;align-items:center;gap:6px;margin:0}
+.sw{width:12px;height:12px;border-radius:3px;flex-shrink:0;border:1px solid rgba(0,0,0,0.06)}
+.par{margin-top:2px;font-size:10.5px;color:#666;line-height:1.3}
+#btns button{padding:7px 12px;border:1.5px solid #ccc;border-radius:8px;
+  background:#fff;color:#777;font-size:11px;font-family:inherit;cursor:pointer;
+  transition:all 0.15s;user-select:none}
+#btns button.on{border-color:#4477cc;background:#4477cc;color:#fff;font-weight:600}
+#btns button:hover:not(.on){border-color:#999;background:#f5f5f5}
+.btnrow{display:flex;gap:4px;align-items:center}
+.recomp{font-size:15px!important;padding:5px 8px!important;line-height:1}
+.btn-unctrl.on{border-color:#c06800!important;background:#c06800!important}
+#params-row{display:flex;gap:10px;margin-top:6px;align-items:center}
+.plbl{font-size:10.5px;color:#666;display:flex;align-items:center;gap:4px}
+.plbl select{font-size:10.5px;padding:3px 6px;border:1px solid #ccc;border-radius:5px;
+  background:#fff;color:#333;font-family:inherit;cursor:pointer}
+.plbl select option:disabled{color:#bbb}
+#ctrl{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,0.75);backdrop-filter:blur(8px);
+  color:#999;font-size:11px;padding:6px 18px;border-radius:20px;
+  box-shadow:0 1px 8px rgba(0,0,0,0.05)}
+#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:#f2f2f2;z-index:100;transition:opacity 0.6s ease}
+#loading.done{opacity:0;pointer-events:none}
+.spinner{width:36px;height:36px;border:3px solid #e0e0e0;border-top-color:#4477cc;
+  border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading h3{font-size:18px;color:#333;margin-bottom:6px;text-align:center}
+#loading p{font-size:13px;color:#888;text-align:center}
+.bar{width:200px;height:4px;background:#e0e0e0;border-radius:2px;margin:12px auto 0;overflow:hidden}
+.fill{height:100%;background:#4477cc;border-radius:2px;width:0%;transition:width 0.2s}
+
+/* Mobile layout: canvas top 2/3, panel bottom 1/3 */
+@media(max-width:768px){
+  #panel{position:fixed;bottom:0;left:0;right:0;top:auto;
+    max-width:none;border-radius:16px 16px 0 0;padding:8px 12px;
+    box-shadow:0 -2px 20px rgba(0,0,0,0.10);
+    max-height:33.4vh;overflow-y:auto;
+    font-size:12px;line-height:1.3}
+  #panel-top{gap:10px}
+  #panel h2{font-size:13px}
+  #panel .sub{font-size:9px;margin-bottom:2px}
+  .leg{font-size:10px;margin:0}
+  .par{font-size:9px;margin-top:2px}
+  #btns button{padding:6px 10px;font-size:11px}
+  .btnrow{display:flex;gap:3px}
+  .btnrow button:first-child{flex:1}
+  .recomp{width:auto!important;flex:0 0 auto}
+  #ctrl{display:none}
+  #viewport{position:fixed;top:0;left:0;right:0;height:66.6vh}
+}
+@media(min-width:769px){
+  #viewport{position:fixed;inset:0}
+}
+</style>
+</head><body>
+
+<div id="loading"><div>
+  <div class="spinner"></div>
+  <h3>Loading Safe Set</h3>
+  <p id="loadMsg">Connecting...</p>
+  <div class="bar"><div class="fill" id="loadBar"></div></div>
+</div></div>
+
+<div id="panel">
+  <div id="panel-top">
+    <div id="info-col">
+      <h2>3D Safe Set — Lorenz System</h2>
+      <div class="sub">Capeáns, Sabuco, Sanjuán &amp; Yorke (2017)<br>
+      Phil. Trans. R. Soc. A <b>375</b>: 20160211</div>
+      <div class="leg"><div class="sw" style="background:#5588ee"></div>Safe set Q<sub>∞</sub></div>
+      <div class="leg"><div class="sw" style="background:#cc2211"></div>Asymptotic safe set</div>
+      <div class="leg"><div class="sw" style="background:rgba(30,41,59,0.6)"></div>Controlled trajectory</div>
+      <div class="leg"><div class="sw" style="background:rgba(192,104,0,0.7)"></div>Uncontrolled trajectory</div>
+      <div class="par">σ=10, b=8/3, r=20</div>
+      <div id="params-row">
+        <label class="plbl">Δt
+          <select id="selDt" onchange="onParamChange()">
+            <option value="1.2" selected>1.2</option>
+            <option value="2.4" disabled>2.4</option>
+            <option value="3.6" disabled>3.6</option>
+          </select>
+        </label>
+        <label class="plbl">(ξ₀, u₀)
+          <select id="selXU" onchange="onParamChange()">
+            <option value="1.50,1.00" selected>(1.5, 1.0)</option>
+            <option value="0.60,0.40">(0.6, 0.4)</option>
+            <option value="0.30,0.20">(0.3, 0.2)</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div id="btns">
+      <button id="bSafe" class="on" onclick="tog('safe')">Safe Set</button>
+      <button id="bAsym" onclick="tog('asym')">Asymptotic</button>
+      <button id="bHalf" onclick="tog('half')">Half Asymp.</button>
+      <div class="btnrow">
+        <button id="bTraj" onclick="tog('traj')">Trajectory</button>
+        <button id="bRecomp" class="recomp" onclick="recompute()" title="New controlled">&#x21bb;</button>
+      </div>
+      <div class="btnrow">
+        <button id="bUnctrl" class="btn-unctrl" onclick="tog('unctrl')">Uncontrolled</button>
+        <button id="bRecompU" class="recomp" onclick="recomputeU()" title="New uncontrolled">&#x21bb;</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="ctrl">Left-drag: rotate &ensp;·&ensp; Scroll: zoom &ensp;·&ensp; Right-drag: pan</div>
+
+<div id="viewport"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+// =========================================================================
+//  DATA URL — dynamic based on dropdown selections
+// =========================================================================
+const BASE_URL = 'https://raw.githubusercontent.com/acuarelico/partial_control/main/';
+
+function getDataURL() {
+  var dt = document.getElementById('selDt').value;
+  var xu = document.getElementById('selXU').value.split(',');
+  return BASE_URL + 'batch_lorenz_N2001_dt' + dt + '_xi' + xu[0] + '_u' + xu[1] + '.bin';
+}
+
+// ======================== SCENE =========================================
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf2f2f2);
+
+const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 800);
+cam.up.set(0, 0, 1);
+
+const vp = document.getElementById('viewport');
+const R = new THREE.WebGLRenderer({ antialias: true });
+function vpSize() { return [vp.clientWidth || innerWidth, vp.clientHeight || innerHeight]; }
+const [vw0,vh0] = vpSize();
+R.setSize(vw0, vh0);
+R.setPixelRatio(Math.min(devicePixelRatio, 2));
+R.shadowMap.enabled = true;
+R.shadowMap.type = THREE.PCFSoftShadowMap;
+R.outputEncoding = THREE.sRGBEncoding;
+R.toneMapping = THREE.ACESFilmicToneMapping;
+R.toneMappingExposure = 1.1;
+R.localClippingEnabled = true;
+vp.appendChild(R.domElement);
+cam.aspect = vw0/vh0; cam.updateProjectionMatrix();
+
+// ======================== LIGHTING ======================================
+scene.add(new THREE.HemisphereLight(0xddeeff, 0x99aabb, 0.5));
+const kL = new THREE.DirectionalLight(0xffffff, 0.8);
+kL.position.set(40, -25, 55); kL.castShadow = true;
+kL.shadow.mapSize.set(1024, 1024);
+kL.shadow.camera.left=-40; kL.shadow.camera.right=40;
+kL.shadow.camera.top=40; kL.shadow.camera.bottom=-40;
+scene.add(kL);
+const fL = new THREE.DirectionalLight(0xaabbdd, 0.35);
+fL.position.set(-35, 40, 25); scene.add(fL);
+const rL = new THREE.DirectionalLight(0xffeedd, 0.2);
+rL.position.set(10, 10, -30); scene.add(rL);
+
+// ======================== LAYER GROUPS ==================================
+const layers = {
+  safe: new THREE.Group(),
+  asym: new THREE.Group(),
+  half: new THREE.Group(),
+  traj: new THREE.Group(),
+  unctrl: new THREE.Group()
+};
+const grpBase = new THREE.Group();
+scene.add(grpBase);
+Object.values(layers).forEach(g => scene.add(g));
+
+// Initial visibility
+const vis = { safe: true, asym: false, half: false, traj: false, unctrl: false };
+function applyVis() {
+  Object.keys(vis).forEach(k => { layers[k].visible = vis[k]; });
+  document.getElementById('bSafe').className = vis.safe ? 'on' : '';
+  document.getElementById('bAsym').className = vis.asym ? 'on' : '';
+  document.getElementById('bHalf').className = vis.half ? 'on' : '';
+  document.getElementById('bTraj').className = vis.traj ? 'on' : '';
+  document.getElementById('bUnctrl').className = vis.unctrl ? 'btn-unctrl on' : 'btn-unctrl';
+}
+function tog(key) {
+  vis[key] = !vis[key];
+  if (key === 'asym' && vis.asym) vis.half = false;
+  if (key === 'half' && vis.half) vis.asym = false;
+  if (key === 'unctrl' && vis.unctrl && layers.unctrl.children.length === 0) {
+    if (typeof window.recomputeU === 'function') window.recomputeU();
+  }
+  applyVis();
+}
+applyVis();
+
+// ======================== HELPERS =======================================
+function mkMesh(verts, faces, normals, color, opacity, clips, clipInter) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(verts, 3));
+  g.setIndex(new THREE.BufferAttribute(faces, 1));
+  g.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+  const m = new THREE.MeshPhongMaterial({
+    color, opacity, transparent: opacity < 0.99,
+    side: THREE.DoubleSide, depthWrite: opacity > 0.9,
+    shininess: 50, specular: new THREE.Color(0x333333),
+    clippingPlanes: clips || [],
+    clipIntersection: !!clipInter
+  });
+  const mesh = new THREE.Mesh(g, m);
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  return mesh;
+}
+
+function mkLabel(text, pos, size) {
+  const c = document.createElement('canvas'); c.width = 128; c.height = 64;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#777'; ctx.font = 'bold 40px "Segoe UI",sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(text, 64, 32);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: new THREE.CanvasTexture(c), transparent: true
+  }));
+  sp.position.set(pos[0], pos[1], pos[2]);
+  sp.scale.set(size, size * 0.5, 1);
+  return sp;
+}
+
+// ======================== Z-UP ORBIT + PAN ==============================
+// Camera defined by: target point, distance, azimuth (around Z), elevation (from XY)
+const tgt = new THREE.Vector3(0, 0, 0);
+let camDist = 110, camAz = -0.7, camEl = 0.45;
+
+function updateCam() {
+  const ce = Math.cos(camEl), se = Math.sin(camEl);
+  const ca = Math.cos(camAz), sa = Math.sin(camAz);
+  cam.position.set(
+    tgt.x + camDist * ce * ca,
+    tgt.y + camDist * ce * sa,
+    tgt.z + camDist * se
+  );
+  cam.lookAt(tgt);
+}
+updateCam();
+
+let _md = false, _btn = -1, _mx = 0, _my = 0;
+const cv = R.domElement;
+
+cv.addEventListener('mousedown', e => {
+  _md = true; _btn = e.button; _mx = e.clientX; _my = e.clientY;
+});
+window.addEventListener('mouseup', () => { _md = false; _btn = -1; });
+cv.addEventListener('contextmenu', e => e.preventDefault());
+
+cv.addEventListener('mousemove', e => {
+  if (!_md) return;
+  const dx = e.clientX - _mx, dy = e.clientY - _my;
+  _mx = e.clientX; _my = e.clientY;
+
+  if (_btn === 2 || (_btn === 0 && e.shiftKey)) {
+    // RIGHT-DRAG or SHIFT+LEFT-DRAG: PAN
+    // Move target in the camera's local right/up plane
+    const panScale = camDist * 0.001;
+    const right = new THREE.Vector3();
+    const up = new THREE.Vector3();
+    right.setFromMatrixColumn(cam.matrix, 0);  // camera right
+    up.setFromMatrixColumn(cam.matrix, 1);      // camera up
+    tgt.addScaledVector(right, -dx * panScale);
+    tgt.addScaledVector(up, dy * panScale);
+  } else if (_btn === 0) {
+    // LEFT-DRAG: ORBIT
+    camAz -= dx * 0.005;
+    camEl += dy * 0.005;
+    camEl = Math.max(0.05, Math.min(1.3, camEl));
+  }
+  updateCam();
+});
+
+cv.addEventListener('wheel', e => {
+  e.preventDefault();
+  // Normalize: clamp delta to [-3,3], then scale proportionally to distance
+  var d = Math.max(-3, Math.min(3, e.deltaY * 0.01));
+  camDist += d * camDist * 0.04;
+  camDist = Math.max(5, Math.min(250, camDist));
+  updateCam();
+}, {passive: false});
+
+// Touch: 1-finger orbit, 2-finger pinch zoom, with anti-bounce guard
+let _t0 = null, _td = 0, _pinching = false, _pinchEnd = 0;
+cv.addEventListener('touchstart', e => {
+  e.preventDefault();
+  if (e.touches.length === 2) {
+    _pinching = true;
+    _t0 = null;  // cancel any 1-finger tracking
+    _td = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY);
+  } else if (e.touches.length === 1 && !_pinching) {
+    _t0 = {x: e.touches[0].clientX, y: e.touches[0].clientY};
+  }
+}, {passive: false});
+
+cv.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (e.touches.length === 2 && _pinching) {
+    const nd = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY);
+    if (_td > 0 && nd > 0) {
+      var ratio = _td / nd;
+      camDist *= ratio;
+      camDist = Math.max(5, Math.min(250, camDist));
+      updateCam();
+    }
+    _td = nd;
+  } else if (e.touches.length === 1 && _t0 && !_pinching) {
+    // Only orbit if not recently pinching
+    if (Date.now() - _pinchEnd < 300) return;
+    const dx = e.touches[0].clientX - _t0.x;
+    const dy = e.touches[0].clientY - _t0.y;
+    camAz -= dx * 0.004;
+    camEl += dy * 0.004;
+    camEl = Math.max(0.05, Math.min(1.3, camEl));
+    _t0 = {x: e.touches[0].clientX, y: e.touches[0].clientY};
+    updateCam();
+  }
+}, {passive: false});
+
+cv.addEventListener('touchend', e => {
+  e.preventDefault();
+  if (_pinching && e.touches.length < 2) {
+    _pinching = false;
+    _pinchEnd = Date.now();  // cooldown: ignore 1-finger for 300ms
+    _t0 = null;
+  }
+  if (e.touches.length === 0) {
+    _t0 = null;
+  } else if (e.touches.length === 1 && !_pinching && Date.now() - _pinchEnd > 300) {
+    _t0 = {x: e.touches[0].clientX, y: e.touches[0].clientY};
+  }
+}, {passive: false});
+
+// ======================== RENDER ========================================
+(function anim() { requestAnimationFrame(anim); R.render(scene, cam); })();
+window.addEventListener('resize', () => {
+  const [vw,vh] = vpSize();
+  cam.aspect = vw / vh;
+  cam.updateProjectionMatrix();
+  R.setSize(vw, vh);
+});
+
+// ======================== LOAD DATA =====================================
+const msg = document.getElementById('loadMsg');
+const bar = document.getElementById('loadBar');
+
+// file:// protocol: fetch() is blocked by CORS, use XMLHttpRequest fallback
+function loadBin(url) {
+  return new Promise((resolve, reject) => {
+    if (location.protocol === 'file:') {
+      // XMLHttpRequest works with file:// in most browsers
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'arraybuffer';
+      xhr.onprogress = e => {
+        if (e.lengthComputable) {
+          const pct = (e.loaded / e.total * 100);
+          msg.textContent = `Loading... ${pct | 0}%`;
+          bar.style.width = pct + '%';
+        }
+      };
+      xhr.onload = () => {
+        if (xhr.status === 0 || xhr.status === 200) resolve(xhr.response);
+        else reject(new Error('XHR status ' + xhr.status));
+      };
+      xhr.onerror = () => reject(new Error(
+        'Cannot load file. Try:\n' +
+        '1. Open from MATLAB: web(\"lorenz_viewer.html\", \"-browser\")\n' +
+        '2. Or run: python3 -m http.server\n' +
+        '   then open http://localhost:8000/lorenz_viewer.html'));
+      xhr.send();
+    } else {
+      // Normal fetch with streaming progress
+      fetch(url).then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const len = +r.headers.get('content-length') || 0;
+        if (!r.body) return r.arrayBuffer();
+        const reader = r.body.getReader();
+        let received = 0; const chunks = [];
+        return (function read() {
+          return reader.read().then(({ done, value }) => {
+            if (done) return new Blob(chunks).arrayBuffer();
+            chunks.push(value); received += value.length;
+            const pct = len ? (received / len * 100) : 0;
+            msg.textContent = len ? `Loading... ${pct | 0}%` :
+              `Loading... ${(received / 1e6).toFixed(1)} MB`;
+            bar.style.width = (len ? pct : 50) + '%';
+            return read();
+          });
+        })();
+      }).then(resolve).catch(reject);
+    }
+  });
+}
+
+// ======================== LOAD AND BUILD =================================
+function loadAndBuild(url) {
+  // Show loading
+  var ld = document.getElementById('loading');
+  ld.style.opacity = '1'; ld.style.pointerEvents = 'all';
+  ld.classList.remove('done');
+  msg.textContent = 'Loading...'; bar.style.display = ''; bar.style.width = '0%';
+
+  // Clear existing scene objects
+  [layers.safe, layers.asym, layers.half, layers.traj, layers.unctrl, grpBase].forEach(g => {
+    while(g.children.length) {
+      var c = g.children[0]; g.remove(c);
+      if(c.geometry) c.geometry.dispose();
+      if(c.material) {
+        if(c.material.map) c.material.map.dispose();
+        c.material.dispose();
+      }
+    }
+  });
+
+  loadBin(url)
+    .then(buf => {
+    msg.textContent = 'Building scene...';
+    bar.style.width = '100%';
+
+    // Parse header (8 × uint32)
+    const dv = new DataView(buf);
+    const nVS=dv.getUint32(0,true),  nFS=dv.getUint32(4,true);
+    const nVC=dv.getUint32(8,true),  nFC=dv.getUint32(12,true);
+    const nVA=dv.getUint32(16,true), nFA=dv.getUint32(20,true);
+    const nT =dv.getUint32(24,true), nC =dv.getUint32(28,true);
+
+    let off = 32;
+    function rF(n) { const a = new Float32Array(buf, off, n); off += n * 4; return a; }
+    function rU(n) { const a = new Uint32Array(buf, off, n);  off += n * 4; return a; }
+
+    const sv=rF(nVS*3), sn=rF(nVS*3), sf=rU(nFS*3);
+    const cv_=rF(nVC*3), cn=rF(nVC*3), cf=rU(nFC*3);
+    const av=rF(nVA*3), an=rF(nVA*3), af=rU(nFA*3);
+    const traj=rF(nT*3), ctrl=rF(nC*6), attr=rF(6);
+    const Cp = [attr[0], attr[1], attr[2]];
+    const Cm = [attr[3], attr[4], attr[5]];
+
+    // Center on the Lorenz attractor region (z ≈ 19), not the full domain
+    // Compute centroid of asymptotic set for best centering
+    let cx=0, cy=0, cz=0;
+    for (let i=0; i<av.length; i+=3) { cx+=av[i]; cy+=av[i+1]; cz+=av[i+2]; }
+    const nv = av.length / 3;
+    cx /= nv; cy /= nv; cz /= nv;
+    const zOff = -cz;  // shift so attractor center is at z=0
+
+    // Set camera target to centroid
+    tgt.set(cx, cy, 0);  // x,y centroid, z=0 after offset
+    updateCam();
+
+    // Find z range for ground plane
+    let zMin = 1e9;
+    for (let i=2; i<sv.length; i+=3) zMin = Math.min(zMin, sv[i]);
+    for (let i=2; i<av.length; i+=3) zMin = Math.min(zMin, av[i]);
+
+    // Ground plane
+    const gp = new THREE.Mesh(
+      new THREE.PlaneGeometry(80, 80),
+      new THREE.MeshPhongMaterial({ color: 0xeaeaea, side: THREE.DoubleSide, shininess: 0 })
+    );
+    gp.position.set(0, 0, zMin + zOff - 5); gp.receiveShadow = true;
+    grpBase.add(gp);
+
+    // === LAYER: safe (safe set mesh + boundary caps) ===
+    const mSafe = mkMesh(sv, sf, sn, 0x5588ee, 1.0);
+    mSafe.position.z = zOff; layers.safe.add(mSafe);
+    if (nVC > 0) {
+      const mCaps = mkMesh(cv_, cf, cn, 0x1a3388, 1.0);
+      mCaps.position.z = zOff; layers.safe.add(mCaps);
+    }
+
+    // === LAYER: asym (full asymptotic, no clipping) ===
+    const mAsymFull = mkMesh(av, af, an, 0xcc2211, 1.0);
+    mAsymFull.position.z = zOff; layers.asym.add(mAsymFull);
+
+    // === LAYER: half (asymptotic with clipping planes) ===
+    // Cut region: x > 0 AND z_object > 20 → remove that octant
+    // In world space: z_world = z_object + zOff
+    const zCutWorld = 20 + zOff;
+    const clipPlanes = [
+      new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0),       // clips x > 0
+      new THREE.Plane(new THREE.Vector3(0, 0, -1), zCutWorld) // clips z > 20
+    ];
+    const mHalf = mkMesh(av, af, an, 0xcc2211, 1.0, clipPlanes, true);
+    mHalf.position.z = zOff; layers.half.add(mHalf);
+    // Dark inner face at cut
+    const gInner = new THREE.BufferGeometry();
+    gInner.setAttribute('position', new THREE.BufferAttribute(av, 3));
+    gInner.setIndex(new THREE.BufferAttribute(af, 1));
+    gInner.setAttribute('normal', new THREE.BufferAttribute(an, 3));
+    const mInner = new THREE.Mesh(gInner, new THREE.MeshPhongMaterial({
+      color: 0x661008, opacity: 0.65, transparent: true,
+      side: THREE.BackSide, shininess: 10,
+      clippingPlanes: clipPlanes, clipIntersection: true
+    }));
+    mInner.position.z = zOff; layers.half.add(mInner);
+
+    // === TRAJECTORY ENGINE (shared by controlled & uncontrolled) ===
+    const SG=10, BP_=8/3, RP=20, dtT=0.002;
+    var curDt=1.2, curXi=1.5, curU0=1.0;
+    var nSub=Math.round(curDt/dtT), stK=3;
+
+    function readParams(){
+      curDt = parseFloat(document.getElementById('selDt').value);
+      var xu = document.getElementById('selXU').value.split(',');
+      curXi = parseFloat(xu[0]); curU0 = parseFloat(xu[1]);
+      nSub = Math.round(curDt/dtT);
+    }
+
+    function rk4(sx,sy,sz){
+      var d1x=SG*(sy-sx),d1y=RP*sx-sx*sz-sy,d1z=sx*sy-BP_*sz;
+      var hx=sx+.5*dtT*d1x,hy=sy+.5*dtT*d1y,hz=sz+.5*dtT*d1z;
+      var d2x=SG*(hy-hx),d2y=RP*hx-hx*hz-hy,d2z=hx*hy-BP_*hz;
+      hx=sx+.5*dtT*d2x;hy=sy+.5*dtT*d2y;hz=sz+.5*dtT*d2z;
+      var d3x=SG*(hy-hx),d3y=RP*hx-hx*hz-hy,d3z=hx*hy-BP_*hz;
+      hx=sx+dtT*d3x;hy=sy+dtT*d3y;hz=sz+dtT*d3z;
+      var d4x=SG*(hy-hx),d4y=RP*hx-hx*hz-hy,d4z=hx*hy-BP_*hz;
+      return[sx+(dtT/6)*(d1x+2*d2x+2*d3x+d4x),
+             sy+(dtT/6)*(d1y+2*d2y+2*d3y+d4y),
+             sz+(dtT/6)*(d1z+2*d2z+2*d3z+d4z)];
+    }
+
+    function nearA(px,py,pz){
+      var best=1e18,bx=px,by=py,bz=pz;
+      for(var i=0;i<av.length;i+=3){
+        var dx=av[i]-px,dy=av[i+1]-py,dz=av[i+2]-pz;
+        var d2=dx*dx+dy*dy+dz*dz;
+        if(d2<best){best=d2;bx=av[i];by=av[i+1];bz=av[i+2];}
+      }
+      return [bx,by,bz,Math.sqrt(best)];
+    }
+
+    // Inside/outside test via raycasting
+    var asymGeoRC = new THREE.BufferGeometry();
+    asymGeoRC.setAttribute('position', new THREE.BufferAttribute(av, 3));
+    asymGeoRC.setIndex(new THREE.BufferAttribute(af, 1));
+    var asymMeshRC = new THREE.Mesh(asymGeoRC, new THREE.MeshBasicMaterial({side:THREE.DoubleSide}));
+    var raycaster = new THREE.Raycaster();
+    function isInside(px,py,pz){
+      raycaster.set(new THREE.Vector3(px,py,pz), new THREE.Vector3(1,0,0));
+      return (raycaster.intersectObject(asymMeshRC).length % 2) === 1;
+    }
+
+    // PRNG
+    var _seed=Date.now()%2147483647;
+    function sRand(){_seed=(_seed*16807)%2147483647;return(_seed-1)/2147483646;}
+    function randXi(){
+      var ang=sRand()*2*Math.PI,cos=2*sRand()-1,sin=Math.sqrt(1-cos*cos);
+      var rad=curXi*Math.cbrt(sRand());
+      return[rad*sin*Math.cos(ang),rad*sin*Math.sin(ang),rad*cos];
+    }
+    function randStartVertex(){
+      var i=Math.floor(sRand()*nv)*3;
+      return [av[i],av[i+1],av[i+2]];
+    }
+
+    // Helper: array of pts → THREE.Line added to a group
+    function ptsToLine(arr, group, color, opacity){
+      var v=[];
+      for(var i=0;i<arr.length;i+=3)
+        v.push(new THREE.Vector3(arr[i],arr[i+1],arr[i+2]+zOff));
+      group.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(v),
+        new THREE.LineBasicMaterial({color:color,transparent:true,opacity:opacity})
+      ));
+    }
+
+    // Clear all children from a group
+    function clearGroup(g){
+      while(g.children.length>0){
+        var c=g.children[0]; g.remove(c);
+        if(c.geometry)c.geometry.dispose();
+        if(c.material)c.material.dispose();
+      }
+    }
+
+    // === CONTROLLED TRAJECTORY ===
+    function computeControlled(){
+      readParams();
+      clearGroup(layers.traj);
+      var start=randStartVertex();
+      var qx=start[0],qy=start[1],qz=start[2];
+      var pts=[];
+      for(var nc=0;nc<300;nc++){
+        var sx=qx,sy=qy,sz=qz;
+        for(var st=0;st<nSub;st++){
+          var r=rk4(sx,sy,sz);sx=r[0];sy=r[1];sz=r[2];
+          if(st%stK===0)pts.push(sx,sy,sz);
+        }
+        var xi=randXi();
+        var dx=sx+xi[0],dy=sy+xi[1],dz=sz+xi[2];
+        if(isInside(dx,dy,dz)){
+          qx=dx;qy=dy;qz=dz;
+        } else {
+          var ns=nearA(dx,dy,dz);
+          if(ns[3]>curXi+curU0)break;
+          qx=ns[0];qy=ns[1];qz=ns[2];
+        }
+        pts.push(qx,qy,qz);
+      }
+      ptsToLine(pts, layers.traj, 0x1e293b, 0.55);
+      vis.traj=true; applyVis();
+      console.log('Controlled:',pts.length/3,'pts');
+    }
+
+    // C± markers (always visible, added once to grpBase)
+    function addM(pos,lbl){
+      var sp=new THREE.Mesh(new THREE.SphereGeometry(0.6,12,12),new THREE.MeshPhongMaterial({color:0x888888}));
+      sp.position.set(pos[0],pos[1],pos[2]+zOff);grpBase.add(sp);
+      grpBase.add(mkLabel(lbl,[pos[0]+2,pos[1]-1,pos[2]+2+zOff],4));
+    }
+    addM(Cp,'C⁺'); addM(Cm,'C⁻');
+
+    function computeUncontrolled(){
+      readParams();
+      clearGroup(layers.unctrl);
+      var start=randStartVertex();
+      var sx=start[0],sy=start[1],sz=start[2];
+      var pts=[sx,sy,sz];
+      var cpx=Cp[0],cpy=Cp[1],cpz=Cp[2];
+      var cmx=Cm[0],cmy=Cm[1],cmz=Cm[2];
+      var rAttr=1.0; // stop radius near attractors
+      for(var nc=0;nc<300;nc++){
+        var escaped=false;
+        for(var st=0;st<nSub;st++){
+          var r=rk4(sx,sy,sz);sx=r[0];sy=r[1];sz=r[2];
+          if(st%stK===0)pts.push(sx,sy,sz);
+          // Check proximity to attractors
+          var dp=(sx-cpx)*(sx-cpx)+(sy-cpy)*(sy-cpy)+(sz-cpz)*(sz-cpz);
+          var dm=(sx-cmx)*(sx-cmx)+(sy-cmy)*(sy-cmy)+(sz-cmz)*(sz-cmz);
+          if(dp<rAttr*rAttr||dm<rAttr*rAttr){escaped=true;break;}
+        }
+        if(escaped)break;
+        // Disturbance but NO control
+        var xi=randXi();
+        sx+=xi[0];sy+=xi[1];sz+=xi[2];
+        pts.push(sx,sy,sz);
+      }
+      ptsToLine(pts, layers.unctrl, 0xc06800, 0.55);
+      vis.unctrl=true; applyVis();
+      console.log('Uncontrolled:',pts.length/3,'pts,',nc,'steps before escape');
+    }
+
+    // === RECOMPUTE BUTTONS ===
+    window.recompute = function(){
+      _seed=Date.now()%2147483647;
+      computeControlled();
+    };
+    window.recomputeU = function(){
+      _seed=Date.now()%2147483647;
+      computeUncontrolled();
+    };
+
+    // Parameter change: load new .bin from GitHub
+    window.onParamChange = function(){
+      readParams();
+      loadAndBuild(getDataURL());
+    };
+
+    // Initial computation
+    computeControlled();
+
+    // Apply initial visibility
+    applyVis();
+
+    // Done
+    setTimeout(() => document.getElementById('loading').classList.add('done'), 150);
+    console.log(`Loaded: safe=${nVS}v caps=${nVC}v asym=${nVA}v traj=${nT}pts ctrl=${nC}segs`);
+  })
+  .catch(err => {
+    msg.innerHTML = `<span style="color:#c33">Error: ${err.message}</span><br><br>
+      <span style="font-size:12px">This combination may not be uploaded yet.</span>`;
+    bar.style.display = 'none';
+  });
+}
+
+// Initial load
+loadAndBuild(getDataURL());
+
+</script></body></html>
