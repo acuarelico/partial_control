@@ -1,0 +1,559 @@
+{
+  "parameters": {
+    "safe": {
+      "ds": 2,
+      "sigma": 0.5,
+      "threshold": 0.5,
+      "max_faces": 500000
+    },
+    "asym": {
+      "ds": 1,
+      "sigma": 0.15,
+      "threshold": 0.5,
+      "max_faces": 500000
+    },
+    "draco_quantization_bits": 14
+  },
+  "files": [
+    {
+      "source": "henon3d_delay_n1_xi0.015_u0.01.npz",
+      "base": "henon3d_delay_n1_xi0.015_u0.01",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 1,
+        "xi0": 0.015,
+        "u0": 0.01
+      },
+      "counts": {
+        "N_safe": 3241640311,
+        "N_asymp": 25827124
+      },
+      "safe": {
+        "file": "henon3d_delay_n1_xi0.015_u0.01_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 250002,
+        "faces": 500000,
+        "size_MB": 0.86
+      },
+      "asym": {
+        "file": "henon3d_delay_n1_xi0.015_u0.01_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 250001,
+        "faces": 500000,
+        "size_MB": 0.71
+      }
+    },
+    {
+      "source": "henon3d_delay_n1_xi0.03_u0.02.npz",
+      "base": "henon3d_delay_n1_xi0.03_u0.02",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 1,
+        "xi0": 0.03,
+        "u0": 0.02
+      },
+      "counts": {
+        "N_safe": 3191007114,
+        "N_asymp": 80724129
+      },
+      "safe": {
+        "file": "henon3d_delay_n1_xi0.03_u0.02_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249996,
+        "faces": 500000,
+        "size_MB": 0.87
+      },
+      "asym": {
+        "file": "henon3d_delay_n1_xi0.03_u0.02_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249905,
+        "faces": 500000,
+        "size_MB": 0.75
+      }
+    },
+    {
+      "source": "henon3d_delay_n1_xi0.06_u0.04.npz",
+      "base": "henon3d_delay_n1_xi0.06_u0.04",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 1,
+        "xi0": 0.06,
+        "u0": 0.04
+      },
+      "counts": {
+        "N_safe": 3090146330,
+        "N_asymp": 217409111
+      },
+      "safe": {
+        "file": "henon3d_delay_n1_xi0.06_u0.04_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 250002,
+        "faces": 500000,
+        "size_MB": 0.87
+      },
+      "asym": {
+        "file": "henon3d_delay_n1_xi0.06_u0.04_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 250002,
+        "faces": 500000,
+        "size_MB": 0.77
+      }
+    },
+    {
+      "source": "henon3d_delay_n1_xi0.12_u0.08.npz",
+      "base": "henon3d_delay_n1_xi0.12_u0.08",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 1,
+        "xi0": 0.12,
+        "u0": 0.08
+      },
+      "counts": {
+        "N_safe": 2943962467,
+        "N_asymp": 516892999
+      },
+      "safe": {
+        "file": "henon3d_delay_n1_xi0.12_u0.08_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 250002,
+        "faces": 500000,
+        "size_MB": 0.86
+      },
+      "asym": {
+        "file": "henon3d_delay_n1_xi0.12_u0.08_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249997,
+        "faces": 500000,
+        "size_MB": 0.79
+      }
+    },
+    {
+      "source": "henon3d_delay_n2_xi0.015_u0.01.npz",
+      "base": "henon3d_delay_n2_xi0.015_u0.01",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 2,
+        "xi0": 0.015,
+        "u0": 0.01
+      },
+      "counts": {
+        "N_safe": 3378377362,
+        "N_asymp": 11730566
+      },
+      "safe": {
+        "file": "henon3d_delay_n2_xi0.015_u0.01_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249993,
+        "faces": 500000,
+        "size_MB": 0.89
+      },
+      "asym": {
+        "file": "henon3d_delay_n2_xi0.015_u0.01_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 250016,
+        "faces": 500000,
+        "size_MB": 0.65
+      }
+    },
+    {
+      "source": "henon3d_delay_n2_xi0.03_u0.02.npz",
+      "base": "henon3d_delay_n2_xi0.03_u0.02",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 2,
+        "xi0": 0.03,
+        "u0": 0.02
+      },
+      "counts": {
+        "N_safe": 3360731687,
+        "N_asymp": 38468418
+      },
+      "safe": {
+        "file": "henon3d_delay_n2_xi0.03_u0.02_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249993,
+        "faces": 500000,
+        "size_MB": 0.89
+      },
+      "asym": {
+        "file": "henon3d_delay_n2_xi0.03_u0.02_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249984,
+        "faces": 500000,
+        "size_MB": 0.74
+      }
+    },
+    {
+      "source": "henon3d_delay_n2_xi0.06_u0.04.npz",
+      "base": "henon3d_delay_n2_xi0.06_u0.04",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 2,
+        "xi0": 0.06,
+        "u0": 0.04
+      },
+      "counts": {
+        "N_safe": 3325264212,
+        "N_asymp": 118393844
+      },
+      "safe": {
+        "file": "henon3d_delay_n2_xi0.06_u0.04_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 250004,
+        "faces": 500000,
+        "size_MB": 0.89
+      },
+      "asym": {
+        "file": "henon3d_delay_n2_xi0.06_u0.04_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249986,
+        "faces": 500000,
+        "size_MB": 0.76
+      }
+    },
+    {
+      "source": "henon3d_delay_n2_xi0.12_u0.08.npz",
+      "base": "henon3d_delay_n2_xi0.12_u0.08",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 2,
+        "xi0": 0.12,
+        "u0": 0.08
+      },
+      "counts": {
+        "N_safe": 3247649819,
+        "N_asymp": 317932090
+      },
+      "safe": {
+        "file": "henon3d_delay_n2_xi0.12_u0.08_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249997,
+        "faces": 500000,
+        "size_MB": 0.89
+      },
+      "asym": {
+        "file": "henon3d_delay_n2_xi0.12_u0.08_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249995,
+        "faces": 500000,
+        "size_MB": 0.78
+      }
+    },
+    {
+      "source": "henon3d_delay_n3_xi0.015_u0.01.npz",
+      "base": "henon3d_delay_n3_xi0.015_u0.01",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 3,
+        "xi0": 0.015,
+        "u0": 0.01
+      },
+      "counts": {
+        "N_safe": 3388990892,
+        "N_asymp": 9131001
+      },
+      "safe": {
+        "file": "henon3d_delay_n3_xi0.015_u0.01_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249990,
+        "faces": 500000,
+        "size_MB": 0.87
+      },
+      "asym": {
+        "file": "henon3d_delay_n3_xi0.015_u0.01_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 250046,
+        "faces": 500000,
+        "size_MB": 0.64
+      }
+    },
+    {
+      "source": "henon3d_delay_n3_xi0.03_u0.02.npz",
+      "base": "henon3d_delay_n3_xi0.03_u0.02",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 3,
+        "xi0": 0.03,
+        "u0": 0.02
+      },
+      "counts": {
+        "N_safe": 3382232647,
+        "N_asymp": 27870215
+      },
+      "safe": {
+        "file": "henon3d_delay_n3_xi0.03_u0.02_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249992,
+        "faces": 500000,
+        "size_MB": 0.89
+      },
+      "asym": {
+        "file": "henon3d_delay_n3_xi0.03_u0.02_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 250004,
+        "faces": 500000,
+        "size_MB": 0.71
+      }
+    },
+    {
+      "source": "henon3d_delay_n3_xi0.06_u0.04.npz",
+      "base": "henon3d_delay_n3_xi0.06_u0.04",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 3,
+        "xi0": 0.06,
+        "u0": 0.04
+      },
+      "counts": {
+        "N_safe": 3368781566,
+        "N_asymp": 96425636
+      },
+      "safe": {
+        "file": "henon3d_delay_n3_xi0.06_u0.04_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249994,
+        "faces": 500000,
+        "size_MB": 0.87
+      },
+      "asym": {
+        "file": "henon3d_delay_n3_xi0.06_u0.04_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249973,
+        "faces": 500000,
+        "size_MB": 0.75
+      }
+    },
+    {
+      "source": "henon3d_delay_n3_xi0.12_u0.08.npz",
+      "base": "henon3d_delay_n3_xi0.12_u0.08",
+      "grid": {
+        "NX": 2001,
+        "NY": 2001,
+        "NZ": 2001,
+        "h": 0.002
+      },
+      "box": {
+        "x_min": -2.0,
+        "x_max": 2.0,
+        "y_min": -2.0,
+        "y_max": 2.0,
+        "z_min": -2.0,
+        "z_max": 2.0
+      },
+      "params": {
+        "n_iters": 3,
+        "xi0": 0.12,
+        "u0": 0.08
+      },
+      "counts": {
+        "N_safe": 3339743366,
+        "N_asymp": 272971983
+      },
+      "safe": {
+        "file": "henon3d_delay_n3_xi0.12_u0.08_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249998,
+        "faces": 500000,
+        "size_MB": 0.87
+      },
+      "asym": {
+        "file": "henon3d_delay_n3_xi0.12_u0.08_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249997,
+        "faces": 500000,
+        "size_MB": 0.78
+      }
+    }
+  ]
+}
