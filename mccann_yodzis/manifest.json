@@ -1,0 +1,694 @@
+{
+  "parameters": {
+    "safe": {
+      "ds": 2,
+      "sigma": 0.5,
+      "threshold": 0.5,
+      "max_faces": 500000
+    },
+    "asym": {
+      "ds": 1,
+      "sigma": 0.15,
+      "threshold": 0.5,
+      "max_faces": 500000
+    },
+    "draco_quantization_bits": 14
+  },
+  "files": [
+    {
+      "source": "mccann_yodzis_dt100_xi0.004083_u0.002917.npz",
+      "base": "mccann_yodzis_dt100_xi0.004083_u0.002917",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 100.0,
+        "xi0": 0.004083,
+        "u0": 0.002917
+      },
+      "counts": {
+        "N_safe": 180261473,
+        "N_asymp": 9820651
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt100_xi0.004083_u0.002917_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 164651,
+        "faces": 500000,
+        "size_MB": 1.95
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt100_xi0.004083_u0.002917_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 228660,
+        "faces": 500000,
+        "size_MB": 1.09
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt100_xi0.01_u0.008.npz",
+      "base": "mccann_yodzis_dt100_xi0.01_u0.008",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 100.0,
+        "xi0": 0.01,
+        "u0": 0.008
+      },
+      "counts": {
+        "N_safe": 221089714,
+        "N_asymp": 30157083
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt100_xi0.01_u0.008_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 202162,
+        "faces": 500000,
+        "size_MB": 1.41
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt100_xi0.01_u0.008_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 246329,
+        "faces": 500000,
+        "size_MB": 0.94
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt100_xi0.02_u0.015.npz",
+      "base": "mccann_yodzis_dt100_xi0.02_u0.015",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 100.0,
+        "xi0": 0.02,
+        "u0": 0.015
+      },
+      "counts": {
+        "N_safe": 257128889,
+        "N_asymp": 70112587
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt100_xi0.02_u0.015_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 238549,
+        "faces": 500000,
+        "size_MB": 1.09
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt100_xi0.02_u0.015_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 247641,
+        "faces": 500000,
+        "size_MB": 0.91
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt100_xi0.06_u0.04.npz",
+      "base": "mccann_yodzis_dt100_xi0.06_u0.04",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 100.0,
+        "xi0": 0.06,
+        "u0": 0.04
+      },
+      "counts": {
+        "N_safe": 248756982,
+        "N_asymp": 155251237
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt100_xi0.06_u0.04_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 248353,
+        "faces": 500000,
+        "size_MB": 0.93
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt100_xi0.06_u0.04_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249965,
+        "faces": 500000,
+        "size_MB": 0.86
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt100_xi0.1_u0.07.npz",
+      "base": "mccann_yodzis_dt100_xi0.1_u0.07",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 100.0,
+        "xi0": 0.1,
+        "u0": 0.07
+      },
+      "counts": {
+        "N_safe": 218028208,
+        "N_asymp": 177839935
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt100_xi0.1_u0.07_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 248759,
+        "faces": 500000,
+        "size_MB": 0.92
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt100_xi0.1_u0.07_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249880,
+        "faces": 500000,
+        "size_MB": 0.86
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt150_xi0.004083_u0.002917.npz",
+      "base": "mccann_yodzis_dt150_xi0.004083_u0.002917",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 150.0,
+        "xi0": 0.004083,
+        "u0": 0.002917
+      },
+      "counts": {
+        "N_safe": 142665110,
+        "N_asymp": 7065955
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt150_xi0.004083_u0.002917_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 152305,
+        "faces": 499996,
+        "size_MB": 2.37
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt150_xi0.004083_u0.002917_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 183532,
+        "faces": 500000,
+        "size_MB": 1.53
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt150_xi0.01_u0.008.npz",
+      "base": "mccann_yodzis_dt150_xi0.01_u0.008",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 150.0,
+        "xi0": 0.01,
+        "u0": 0.008
+      },
+      "counts": {
+        "N_safe": 178415134,
+        "N_asymp": 24089321
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt150_xi0.01_u0.008_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 163649,
+        "faces": 500000,
+        "size_MB": 1.94
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt150_xi0.01_u0.008_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 223051,
+        "faces": 499996,
+        "size_MB": 1.19
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt150_xi0.02_u0.015.npz",
+      "base": "mccann_yodzis_dt150_xi0.02_u0.015",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 150.0,
+        "xi0": 0.02,
+        "u0": 0.015
+      },
+      "counts": {
+        "N_safe": 209443429,
+        "N_asymp": 58460633
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt150_xi0.02_u0.015_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 185112,
+        "faces": 499998,
+        "size_MB": 1.66
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt150_xi0.02_u0.015_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 244803,
+        "faces": 500000,
+        "size_MB": 0.98
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt150_xi0.06_u0.04.npz",
+      "base": "mccann_yodzis_dt150_xi0.06_u0.04",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 150.0,
+        "xi0": 0.06,
+        "u0": 0.04
+      },
+      "counts": {
+        "N_safe": 194837459,
+        "N_asymp": 121397430
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt150_xi0.06_u0.04_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 223158,
+        "faces": 500000,
+        "size_MB": 1.31
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt150_xi0.06_u0.04_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249015,
+        "faces": 500000,
+        "size_MB": 0.9
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt150_xi0.1_u0.07.npz",
+      "base": "mccann_yodzis_dt150_xi0.1_u0.07",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 150.0,
+        "xi0": 0.1,
+        "u0": 0.07
+      },
+      "counts": {
+        "N_safe": 170432104,
+        "N_asymp": 138805241
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt150_xi0.1_u0.07_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 226664,
+        "faces": 500000,
+        "size_MB": 1.33
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt150_xi0.1_u0.07_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249156,
+        "faces": 500000,
+        "size_MB": 0.89
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt50_xi0.004083_u0.002917.npz",
+      "base": "mccann_yodzis_dt50_xi0.004083_u0.002917",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 50.0,
+        "xi0": 0.004083,
+        "u0": 0.002917
+      },
+      "counts": {
+        "N_safe": 203575851,
+        "N_asymp": 11071561
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt50_xi0.004083_u0.002917_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 210558,
+        "faces": 500000,
+        "size_MB": 1.32
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt50_xi0.004083_u0.002917_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249671,
+        "faces": 500000,
+        "size_MB": 0.86
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt50_xi0.01_u0.008.npz",
+      "base": "mccann_yodzis_dt50_xi0.01_u0.008",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 50.0,
+        "xi0": 0.01,
+        "u0": 0.008
+      },
+      "counts": {
+        "N_safe": 261663693,
+        "N_asymp": 34663856
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt50_xi0.01_u0.008_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249198,
+        "faces": 500000,
+        "size_MB": 0.93
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt50_xi0.01_u0.008_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249962,
+        "faces": 500000,
+        "size_MB": 0.85
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt50_xi0.02_u0.015.npz",
+      "base": "mccann_yodzis_dt50_xi0.02_u0.015",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 50.0,
+        "xi0": 0.02,
+        "u0": 0.015
+      },
+      "counts": {
+        "N_safe": 260443296,
+        "N_asymp": 66671837
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt50_xi0.02_u0.015_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249294,
+        "faces": 500000,
+        "size_MB": 0.93
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt50_xi0.02_u0.015_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249943,
+        "faces": 500000,
+        "size_MB": 0.85
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt50_xi0.06_u0.04.npz",
+      "base": "mccann_yodzis_dt50_xi0.06_u0.04",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 50.0,
+        "xi0": 0.06,
+        "u0": 0.04
+      },
+      "counts": {
+        "N_safe": 239650413,
+        "N_asymp": 147518086
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt50_xi0.06_u0.04_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249790,
+        "faces": 500000,
+        "size_MB": 0.88
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt50_xi0.06_u0.04_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249979,
+        "faces": 500000,
+        "size_MB": 0.87
+      }
+    },
+    {
+      "source": "mccann_yodzis_dt50_xi0.1_u0.07.npz",
+      "base": "mccann_yodzis_dt50_xi0.1_u0.07",
+      "grid": {
+        "NX": 2059,
+        "NY": 2059,
+        "NZ": 1201,
+        "h": 0.0005833333333333334
+      },
+      "box": {
+        "x_min": -0.1,
+        "x_max": 1.1004999876022339,
+        "y_min": -0.1,
+        "y_max": 1.1004999876022339,
+        "z_min": 0.4,
+        "z_max": 1.100000023841858
+      },
+      "params": {
+        "dt_map": 50.0,
+        "xi0": 0.1,
+        "u0": 0.07
+      },
+      "counts": {
+        "N_safe": 259771907,
+        "N_asymp": 209593124
+      },
+      "safe": {
+        "file": "mccann_yodzis_dt50_xi0.1_u0.07_safe_ds2_s0.50_t0.50.drc",
+        "ds": 2,
+        "sigma": 0.5,
+        "threshold": 0.5,
+        "vertices": 249998,
+        "faces": 500000,
+        "size_MB": 0.85
+      },
+      "asym": {
+        "file": "mccann_yodzis_dt50_xi0.1_u0.07_asym_ds1_s0.15_t0.50.drc",
+        "ds": 1,
+        "sigma": 0.15,
+        "threshold": 0.5,
+        "vertices": 249990,
+        "faces": 500000,
+        "size_MB": 0.85
+      }
+    }
+  ]
+}
