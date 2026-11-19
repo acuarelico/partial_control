@@ -3807,6 +3807,7 @@ function fitDistance(verts,faces,zOff,az,el,cx,cy,sc){
 }
 
 // ------------------------------ helpers ------------------------------
+const ASYM_FRONT=0.45; // scene units (the scene is about 80 units across)
 function mkMesh(verts,faces,normals,color,opacity){
   const g=new THREE.BufferGeometry();
   g.setAttribute('position',new THREE.BufferAttribute(verts,3));
@@ -3938,6 +3939,10 @@ function build(safeGeom,asymGeom,cfg){
   // asymptotic safe set
   const mAsym=mkMesh(av,af,an,0xcc2211,1.0);
   mAsym.material.shininess=25;mAsym.material.specular.set(0x222222);
+  // where the asymptotic safe set lies on the surface of the safe set it is drawn in front of it,
+  // by a fixed distance along the line of sight, so the two surfaces do not interleave
+  mAsym.material.onBeforeCompile=sh=>{sh.vertexShader=sh.vertexShader.replace('#include <project_vertex>',
+    '#include <project_vertex>\n\tvec4 pcFront=projectionMatrix*vec4(mvPosition.xyz+vec3(0.0,0.0,ASYM_FRONT),1.0);\n\tgl_Position.z=pcFront.z/pcFront.w*gl_Position.w;'.replace('ASYM_FRONT',ASYM_FRONT.toFixed(3)));};
   mAsym.position.z=zOff;layers.asym.add(mAsym);
 
   // fixed points C+ and C- (Lorenz)
